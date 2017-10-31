@@ -4,36 +4,44 @@
     <!-- As if this Glitch were a typical HTML CodePen... -->    
     <script src="https://rawgit.com/aframevr/aframe/master/dist/aframe-master.js"></script>
     
+    <!-- Use arrow-key-rotation component defined in separate file. -->
+    <script src="arrow-key-rotation.js"></script>
+
+    <!-- Specify our scene. -->
     <a-scene>
-      <!-- The original example also has this 180 degree rotation to appear to be going forward. -->
-      <a-sky rotation="0 180 0" src="#hlsvideo"></a-sky>
+      <!-- The original example also has this 180 degree rotation, to appear to be going forward. -->
+      <a-videosphere rotation="0 180 0" src="#hlsvideo"></a-videosphere>
       
-      <!-- Text elements for display messaging. -->
-      <a-entity id="msg" position="0 1.4 -1" text="align:center; 
-              width:3;
-              wrapCount:100;
-              color:red;
-              value:Click window to make the video play, if needed.">
-      </a-entity>
-      <a-entity position="0 1.1 -1" text="align:center;
-              width:3;
-              wrapCount:100;
-              color:red;
-              value:This should work with, at least:
-                    Safari Technology Preview on MacOS, Edge on Windows 10, Oculus Browser, Chrome on Android
-                    (application/x-mpegurl, which is native HLS).
-                    Firefox on MacOS / Windows, Chrome on MacOS / Windows 
-                    (video/mp4).
-                                          
-                    This may fail with, at least:
-                    Safari on MacOS / iOS (HLS and/or CORS bugs), Chromium (missing codec support).
-              ">
-      </a-entity>
+      <!-- Define camera with zero user height, movement disabled and arrow key rotation added. -->
+      <a-camera user-height="0" wasd-controls-enabled="false" arrow-key-rotation>
+        <!-- Text elements for display messaging. -->
+        <a-entity id="msg" position="0 -0.3 -1.5" text="align:center; 
+                width:3;
+                wrapCount:100;
+                color:red;
+                value:Click window to make the video play, if needed.">
+        </a-entity>
+        <a-entity position="0 -0.6 -1.5" text="align:center;
+                width:3;
+                wrapCount:100;
+                color:red;
+                value:This should work with, at least:
+                      Safari Technology Preview on MacOS, Edge on Windows 10, Oculus Browser, Chrome on Android
+                      (application/x-mpegurl, which is native HLS).
+                      Firefox on MacOS / Windows, Chrome on MacOS / Windows 
+                      (video/mp4).
+
+                      This may fail with, at least:
+                      Safari on MacOS / iOS (HLS and/or CORS bugs), Chromium (missing codec support).
+                ">
+        </a-entity>
+      </a-camera>      
       
       <!-- Don't wait for the video to load, we're going to stream it. -->
       <a-assets timeout="1">
         <!-- Multiple source video. -->
-        <video id="hlsvideo" style="display:none" autoplay loop crossorigin="anonymous">
+        <!-- A-Frame will add other properties such as crossorigin="anonymous" and playsinline. -->
+        <video id="hlsvideo" style="display:none" autoplay loop>
           <!-- Native HLS video source. -->
           <source type="application/x-mpegurl"
                src="https://cdn.glitch.com/3c75540c-eaff-4599-9386-91482d2a7f43/city_halfres_hls.m3u8?1509419937804" />
@@ -44,13 +52,15 @@
       </a-assets>
     </a-scene>
     
+    <!-- Attach other behaviors. -->
     <script>
+      var scene = document.querySelector('a-scene');
       var video = document.querySelector('#hlsvideo');
       var msg = document.querySelector('#msg');
       
       // When we get the playing event, show what source is used and what type it is.
       video.addEventListener('playing', function () {
-        var currentSource = document.querySelector('[src="' + video.currentSrc + '"]');
+        var currentSource = video.querySelector('[src="' + video.currentSrc + '"]');
         msg.setAttribute('text', 'value', video.currentSrc + '\n' + currentSource.type);                
       });
       
@@ -58,6 +68,17 @@
       window.addEventListener('click', function () {
         video.paused ? video.play() : video.pause();
       });
+
+      // Play when VR display activated, if possible.
+      window.addEventListener('vrdisplayactivate', function () {
+        video.play();
+      });      
+
+      // Play when entering VR, if possible.
+      scene.addEventListener('enter-vr', function () {
+        // Wait a tick, in case a click event fires, then play.
+        setTimeout(function () { video.play(); });
+      });            
     </script>
   </body>
 </html>
