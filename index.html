@@ -7,6 +7,8 @@
     <a-scene>
       <!-- The original example also has this 180 degree rotation to appear to be going forward. -->
       <a-sky rotation="0 180 0" src="#hlsvideo"></a-sky>
+      
+      <!-- Text elements for display messaging. -->
       <a-entity id="msg" position="0 1.4 -1" text="align:center; 
               width:3;
               wrapCount:100;
@@ -28,7 +30,7 @@
               ">
       </a-entity>
       
-      <!-- Don't wait for the video to load, we're probably going to stream it -->
+      <!-- Don't wait for the video to load, we're going to stream it. -->
       <a-assets timeout="1">
         <!-- Multiple source video. -->
         <video id="hlsvideo" style="display:none" autoplay loop crossorigin="anonymous">
@@ -41,6 +43,7 @@
         </video>
       </a-assets>
     </a-scene>
+    
     <script>
       var video = document.querySelector('#hlsvideo');
       var msg = document.querySelector('#msg');
