@@ -6,7 +6,7 @@
     
     <!-- Use components defined in separate files. -->
     <script src="arrow-key-rotation.js"></script>
-    <script src="toggle-play-on-window-click.js"></script>
+    <script src="play-on-window-click.js"></script>
     <script src="play-on-vrdisplayactivate-or-enter-vr.js"></script>
     <script src="hide-once-playing.js"></script>
 
@@ -14,7 +14,7 @@
     <a-scene>
       <!-- The original example also has this 180 degree rotation, to appear to be going forward. -->
       <a-videosphere rotation="0 180 0" src="#video" 
-                     toggle-play-on-window-click
+                     play-on-window-click
                      play-on-vrdisplayactivate-or-enter-vr>
       </a-videosphere>
       
@@ -30,8 +30,8 @@
         </a-entity>
       </a-camera>      
       
-      <!-- Don't wait for the video to load, we're going to stream it. -->
-      <a-assets timeout="1">
+      <!-- Wait for the video to load. -->
+      <a-assets>
         <!-- Single source video. -->
         <!-- A-Frame will add other properties such as crossorigin="anonymous" and playsinline. -->
         <video id="video" style="display:none" autoplay loop>
