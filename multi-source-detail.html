@@ -26,20 +26,16 @@
                 color:red;
                 value:Click window to make the video play, if needed.">
         </a-entity>
-        <a-entity position="0 -0.6 -1.5" text="align:center;
-                width:3;
-                wrapCount:100;
-                color:red;
-                value:This should work with, at least:
-                      Safari Technology Preview on MacOS, Edge on Windows 10, Oculus Browser, Samsung Internet, Chrome on Android
-                      (application/x-mpegurl, which is native HLS).
-                      Firefox on MacOS / Windows, Chrome on MacOS / Windows 
-                      (video/mp4).
+        <!--
+          This should work with, at least:
+          Safari Technology Preview on MacOS, Edge on Windows 10, Oculus Browser, Samsung Internet, Chrome on Android
+          (application/x-mpegurl, which is native HLS).
+          Firefox on MacOS / Windows, Chrome on MacOS / Windows 
+          (video/mp4).
 
-                      This may fail with, at least:
-                      Safari on MacOS / iOS (HLS and/or CORS bugs), Chromium (missing codec support).
-                ">
-        </a-entity>
+          This may fail with, at least:
+          Safari on MacOS / iOS (HLS and/or CORS bugs), Chromium (missing codec support).
+        -->
       </a-camera>      
       
       <!-- Don't wait for the video to load, we're going to stream it. -->
