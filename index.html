@@ -33,8 +33,8 @@
       <!-- Wait for the video to load. -->
       <a-assets>
         <!-- Single source video. -->
-        <!-- A-Frame will add other properties such as crossorigin="anonymous" and playsinline. -->
-        <video id="video" style="display:none" autoplay loop>
+        <video id="video" style="display:none" 
+               autoplay loop crossorigin="anonymous" playsinline webkit-playsinline>
           <!-- MP4 video source. -->
           <source type="video/mp4"
                src="https://ucarecdn.com/fadab25d-0b3a-45f7-8ef5-85318e92a261/" />

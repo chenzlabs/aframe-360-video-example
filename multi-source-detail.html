@@ -41,8 +41,8 @@
       <!-- Don't wait for the video to load, we're going to stream it. -->
       <a-assets timeout="1">
         <!-- Multiple source video. -->
-        <!-- A-Frame will add other properties such as crossorigin="anonymous" and playsinline. -->
-        <video id="video" style="display:none" autoplay loop>
+        <video id="video" style="display:none"
+               autoplay loop crossorigin="anonymous" playsinline webkit-playsinline>
           <!-- Native HLS video source. -->
           <source type="application/x-mpegurl"
                src="https://cdn.glitch.com/3c75540c-eaff-4599-9386-91482d2a7f43/city_halfres_hls.m3u8?1509419937804" />
