@@ -1,4 +1,4 @@
-# aframe-360-video-native-HLS-example
+# aframe-360-video-example
 
 This is a basic example of 360 video playback, using [A-Frame's latest master](https://aframe.io/docs/master/introduction/#what-is-a-frame) distribution build.
 In this example, the video is played using the [`a-videosphere` primitive](https://aframe.io/docs/master/primitives/a-videosphere.html) as the display.
